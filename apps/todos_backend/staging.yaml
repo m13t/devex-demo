@@ -1,0 +1,7 @@
+database:
+  embedded:
+    enabled: true
+  auth:
+    database: todos
+    username: todosstaging
+    password: todosstaging

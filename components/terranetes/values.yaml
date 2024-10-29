@@ -1,0 +1,8 @@
+controller:
+  images:
+    controller: ghcr.io/appvia/terranetes-controller:develop
+    executor: ghcr.io/appvia/terranetes-executor:develop
+    preload: ghcr.io/appvia/terranetes-executor:develop
+
+  enableHelmWebhookRegistration: true
+  enableControllerWebhookRegistration: false

@@ -1,0 +1,10 @@
+env:
+  - name: API_HOST
+    value: todos-backend-prod
+
+ingress:
+  hosts:
+    - host: todo.prod.lvh.me
+      paths:
+        - path: /
+          pathType: Prefix

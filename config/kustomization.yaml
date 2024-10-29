@@ -1,0 +1,6 @@
+resources:
+  - self.yaml
+  - projects.yaml
+  - components.yaml
+  - platform.yaml
+  - apps.yaml

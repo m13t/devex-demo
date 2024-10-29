@@ -1,0 +1,32 @@
+apiVersion: terraform.appvia.io/v1alpha1
+kind: CloudResource
+metadata:
+  name: bucket
+spec:
+  enableAutoApproval: true
+  enableDriftDetection: true
+  plan:
+    name: bucket
+    revision: v0.0.1
+  providerRef:
+    name: aws
+  writeConnectionSecretToRef:
+    name: test
+  variables:
+    bucket: io.m13t.devex.demo
+---
+apiVersion: terraform.appvia.io/v1alpha1
+kind: CloudResource
+metadata:
+  name: deployment
+spec:
+  enableAutoApproval: true
+  plan:
+    name: deployment
+    revision: v0.0.1
+  providerRef:
+    name: kubernetes
+  variables:
+    name: nginx
+    namespace: default
+    image: nginx:latest

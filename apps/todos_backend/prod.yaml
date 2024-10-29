@@ -1,0 +1,7 @@
+database:
+  rds:
+    enabled: true
+  auth:
+    database: todos
+    username: todosprod
+    password: todosprod

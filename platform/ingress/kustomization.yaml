@@ -1,0 +1,4 @@
+resources:
+  - classes.yaml
+  - gateways.yaml
+  - argocd.yaml

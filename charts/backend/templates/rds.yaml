@@ -1,0 +1,31 @@
+{{- if .Values.database.rds.enabled -}}
+apiVersion: terraform.appvia.io/v1alpha1
+kind: CloudResource
+metadata:
+  name: {{ include "backend.fullname" . }}
+  labels:
+    {{- include "backend.labels" . | nindent 4 }}
+  {{- with .Values.database.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  enableAutoApproval: true
+  plan:
+    name: postgres
+    revision: {{ .Values.database.rds.revision }}
+  providerRef:
+    name: aws
+  variables:
+    name: {{ include "backend.fullname" . }}
+    database_name: {{ .Values.database.auth.database }}
+    master_username: {{ .Values.database.auth.username }}
+    master_password: {{ .Values.database.auth.password }}
+  writeConnectionSecretToRef:
+    name: {{ include "backend.fullname" . }}
+    keys:
+      - cluster_master_username:cluster_username
+      - cluster_master_password:cluster_password
+      - cluster_endpoint:cluster_endpoint
+      - cluster_port:cluster_port
+{{- end }}

@@ -1,0 +1,8 @@
+helm:
+  repo: https://istio-release.storage.googleapis.com/charts
+  revision: 1.23.3
+  chart: base
+  namespace: istio-system
+
+sync:
+  phase: primary

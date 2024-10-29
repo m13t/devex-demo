@@ -1,0 +1,55 @@
+apiVersion: terraform.appvia.io/v1alpha1
+kind: Revision
+metadata:
+  name: postgres
+  namespace: terraform-system
+spec:
+  plan:
+    name: postgres
+    categories: [postgresql, database, aws]
+    description: Provides a Postgres database
+    revision: v1.0.7
+  inputs:
+    - key: name
+      description: Name of the cluster
+      required: true
+    - key: database_name
+      description: Name of the database to create
+      required: true
+    - key: master_username
+      description: The username of the root user
+      required: true
+    - key: master_password
+      description: The password of the root user
+      required: true
+  configuration:
+    module: https://github.com/terraform-aws-modules/terraform-aws-rds-aurora.git?ref=v9.10.0
+    variables:
+      engine: aurora-postgresql
+      engine_mode: provisioned
+      engine_version: 15.4
+      db_subnet_group_name: public
+      vpc_id: vpc-00c9f773f79b41879
+      instance_class: db.serverless
+      apply_immediately: true
+      skip_final_snapshot: true
+      serverlessv2_scaling_configuration:
+        min_capacity: 0.5
+        max_capacity: 10
+      manage_master_user_password: false
+      instances:
+        primary: {}
+      publicly_accessible: true
+      security_group_rules:
+        postgres:
+          from_port: 5432
+          to_port: 5432
+          cidr_blocks:
+            - 0.0.0.0/0
+    writeConnectionSecretToRef:
+      name: postgres-config
+      keys:
+        - cluster_master_username:cluster_username
+        - cluster_master_password:cluster_password
+        - cluster_endpoint:cluster_endpoint
+        - cluster_port:cluster_port

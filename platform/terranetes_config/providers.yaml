@@ -1,0 +1,13 @@
+apiVersion: terraform.appvia.io/v1alpha1
+kind: Provider
+metadata:
+  name: aws
+  namespace: terraform-system
+spec:
+  provider: aws
+  source: secret
+  secretRef:
+    namespace: terraform-system
+    name: aws
+  configuration:
+    region: eu-west-2

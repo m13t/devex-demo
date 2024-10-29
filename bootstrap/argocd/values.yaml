@@ -1,0 +1,4 @@
+configs:
+  secret:
+    argocdServerAdminPassword: '$2a$10$LaB2o7zCKpdX406bhC40NuxAvJijXm7Xh0UCDNepPdkXrOStJttpm'
+    argocdServerAdminPasswordMtime: '2024-10-24T13:39:24BST'

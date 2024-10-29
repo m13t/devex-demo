@@ -1,0 +1,10 @@
+env:
+  - name: API_HOST
+    value: todos-backend-staging
+
+ingress:
+  hosts:
+    - host: todo.staging.lvh.me
+      paths:
+        - path: /
+          pathType: Prefix
